@@ -15,7 +15,7 @@ A small tools to calculate OpenCore config properties value. Easy to use.
 ### Requirements
 - Python 3 installed ( >= 3.7)
    - Dependent on packages: pyqt5, pyqtdarktheme, darkdetect (installed via pip)
-   - For Python 3.12, install `pyqtdarktheme` requires option `--ignore-requires-python` of `pip` command. For example:
+   - For Python 3.12, `pyqtdarktheme` requires given version and option `--ignore-requires-python` of `pip` command. For example:
      ```shell
      pip install pyqtdarktheme==2.1.0 --ignore-requires-python
      ```
