@@ -35,7 +35,7 @@ A small tools to calculate OpenCore config properties value. Easy to use.
   - Without plist file, it works as calculation for properties values.
 
 ### Create executable file
-You can use pyinstaller command to create direct executable file:
+You can use `pyinstaller` command to create direct executable file:
 - Windows 
 ```Shell
 pyinstaller OCPropCal-win.spec
