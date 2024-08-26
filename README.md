@@ -59,12 +59,12 @@ For more information, please see [OpenCore Reference Mamual](https://dortania.gi
 - 0x0002 — `OC_ATTR_USE_DISK_LABEL_FILE`, provides custom rendered titles for boot entries.
 - 0x0004 — `OC_ATTR_USE_GENERIC_LABEL_IMAGE`, provides predefined label images for boot entries.
 - 0x0008 — `OC_ATTR_HIDE_THEMED_ICONS`, prefers builtin icons for certain icon categories.
-- 0x0010 - `OC_ATTR_USE_POINTER_CONTROL`, enables pointer control the OpenCore picker when available.
-- 0x0020 - `OC_ATTR_SHOW_DEBUG_DISPLAY`, enable display of additional timing and debug information.
-- 0x0040 - `OC_ATTR_USE_MINIMAL_UI`, use minimal UI display, no Shutdown or Restart buttons.
-- 0x0080 - `OC_ATTR_USE_FLAVOUR_ICON`, provides flexible boot entry content description, suitable for picking the best media across different content sets.
-- 0x0100 - `OC_ATTR_USE_REVERSED_UI`, reverse position of Shutdown and Restart buttons, affects Open Canopy and builtin picker.
-- 0x0200 - `OC_ATTR_REDUCE_MOTION`, reduce password and menu animation in OpenCanopy, leaving only animations which communicate information not otherwise provided.
+- 0x0010 — `OC_ATTR_USE_POINTER_CONTROL`, enables pointer control the OpenCore picker when available.
+- 0x0020 — `OC_ATTR_SHOW_DEBUG_DISPLAY`, enable display of additional timing and debug information.
+- 0x0040 — `OC_ATTR_USE_MINIMAL_UI`, use minimal UI display, no Shutdown or Restart buttons.
+- 0x0080 — `OC_ATTR_USE_FLAVOUR_ICON`, provides flexible boot entry content description, suitable for picking the best media across different content sets.
+- 0x0100 — `OC_ATTR_USE_REVERSED_UI`, reverse position of Shutdown and Restart buttons, affects Open Canopy and builtin picker.
+- 0x0200 — `OC_ATTR_REDUCE_MOTION`, reduce password and menu animation in OpenCanopy, leaving only animations which communicate information not otherwise provided.
 
 #### `ExposeSensitiveData`
 | Title  | Content |
