@@ -13,8 +13,12 @@ A small tools to calculate OpenCore config properties value. Easy to use.
 - Support "checkboxes to value" and "value to checkboxes" at the same user interface.
 
 ### Requirements
-- Python 3.x installed
-   - Dependent on packages: pyqt5, qdarktheme, darkdetect (installed via pip)
+- Python 3 installed ( >= 3.7)
+   - Dependent on packages: pyqt5, pyqtdarktheme, darkdetect (installed via pip)
+   - For Python 3.12, install `pyqtdarktheme` requires option `--ignore-requires-python` of `pip` command. For example:
+     ```shell
+     pip install pyqtdarktheme==2.1.0 --ignore-requires-python
+     ```
 
 ### Launch application
 - Launch with python command:
