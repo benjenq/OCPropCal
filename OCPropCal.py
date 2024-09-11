@@ -358,7 +358,7 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             if chk == None:
                 continue
             if chk.isChecked():
-                bootChkLst.append(bootargs_dict[objName]['value'])
+                bootChkLst.append(bootargs_dict[objName])
         result = self.ocHelp.bootArgsWithArgs(self.tb_bootargs.text(),bootChkLst)
         self.tb_bootargs.setText(result)
 

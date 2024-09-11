@@ -12,177 +12,152 @@ class OCPropType(Enum):
 
 #PickerAttributes
 oca_list = [
-    "OC_ATTR_USE_VOLUME_ICON",
-    "OC_ATTR_USE_DISK_LABEL_FILE",
-    "OC_ATTR_USE_GENERIC_LABEL_IMAGE",
-    "OC_ATTR_HIDE_THEMED_ICONS",
-    "OC_ATTR_USE_POINTER_CONTROL",
-    "OC_ATTR_SHOW_DEBUG_DISPLAY",
-    "OC_ATTR_USE_MINIMAL_UI",
-    "OC_ATTR_USE_FLAVOUR_ICON",
-    "OC_ATTR_USE_REVERSED_UI",
-    "OC_ATTR_REDUCE_MOTION"
+    'OC_ATTR_USE_VOLUME_ICON',
+    'OC_ATTR_USE_DISK_LABEL_FILE',
+    'OC_ATTR_USE_GENERIC_LABEL_IMAGE',
+    'OC_ATTR_HIDE_THEMED_ICONS',
+    'OC_ATTR_USE_POINTER_CONTROL',
+    'OC_ATTR_SHOW_DEBUG_DISPLAY',
+    'OC_ATTR_USE_MINIMAL_UI',
+    'OC_ATTR_USE_FLAVOUR_ICON',
+    'OC_ATTR_USE_REVERSED_UI',
+    'OC_ATTR_REDUCE_MOTION'
 ]
 
 #ExposeSensitiveData
 #https://dreamwhite-oc-esd.vercel.app/
 esd_list = [
-    "OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE",
-    "OC_EXPOSE_OCVERSION_AS_UEFI_VARIABLE",
-    "OC_EXPOSE_OCVERSION_IN_PICKER_NEMU",
-    "OC_EXPOSE_OEMINFO_AS_UEFI_VARIABLES"
+    'OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE',
+    'OC_EXPOSE_OCVERSION_AS_UEFI_VARIABLE',
+    'OC_EXPOSE_OCVERSION_IN_PICKER_NEMU',
+    'OC_EXPOSE_OEMINFO_AS_UEFI_VARIABLES'
 ]
 esd_desc =  {
-    "OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE" : "expose the printable booter path as a UEFI variable.",
-    "OC_EXPOSE_OCVERSION_AS_UEFI_VARIABLE"  :  "expose the OpenCore version as a UEFI variable.",
-    "OC_EXPOSE_OCVERSION_IN_PICKER_NEMU" : "expose the OpenCore version in the OpenCore picker menu title.",
-    "OC_EXPOSE_OEMINFO_AS_UEFI_VARIABLES" : "expose OEM information as a set of UEFI variables."
+    'OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE' : 'expose the printable booter path as a UEFI variable.',
+    'OC_EXPOSE_OCVERSION_AS_UEFI_VARIABLE'  :  'expose the OpenCore version as a UEFI variable.',
+    'OC_EXPOSE_OCVERSION_IN_PICKER_NEMU' : 'expose the OpenCore version in the OpenCore picker menu title.',
+    'OC_EXPOSE_OEMINFO_AS_UEFI_VARIABLES' : 'expose OEM information as a set of UEFI variables.'
 }
 
 #ScanPolicy
 scp_list = [
-    "OC_SCAN_FILE_SYSTEM_LOCK", #0x00000001
-    "OC_SCAN_DEVICE_LOCK",      #0x00000002
-    "OC_SCAN_RESERVE_0x00000004",
-    "OC_SCAN_RESERVE_0x00000008",
-    "OC_SCAN_RESERVE_0x00000010",
-    "OC_SCAN_RESERVE_0x00000020",
-    "OC_SCAN_RESERVE_0x00000040",
-    "OC_SCAN_RESERVE_0x00000080",
-    "OC_SCAN_ALLOW_FS_APFS",    #0x00000100
-    "OC_SCAN_ALLOW_FS_HFS",     #0x00000200
-    "OC_SCAN_ALLOW_FS_ESP",     #0x00000400
-    "OC_SCAN_ALLOW_FS_NTFS",    #0x00000800
-    "OC_SCAN_ALLOW_FS_LINUX_ROOT", #0x00001000
-    "OC_SCAN_ALLOW_FS_LINUX_DATA", #0x00002000
-    "OC_SCAN_ALLOW_FS_XBOOTLDR",   #0x00004000
-    "OC_SCAN_RESERVE_0x00008000",
-    "OC_SCAN_ALLOW_DEVICE_SATA",  #0x00010000
-    "OC_SCAN_ALLOW_DEVICE_SASEX", #0x00020000
-    "OC_SCAN_ALLOW_DEVICE_SCSI",  #0x00040000
-    "OC_SCAN_ALLOW_DEVICE_NVME",  #0x00080000
-    "OC_SCAN_ALLOW_DEVICE_ATAPI", #0x00100000
-    "OC_SCAN_ALLOW_DEVICE_USB",   #0x00200000
-    "OC_SCAN_ALLOW_DEVICE_FIREWIRE", #0x00400000
-    "OC_SCAN_ALLOW_DEVICE_SDCARD", #0x00800000
-    "OC_SCAN_ALLOW_DEVICE_PCI"    #0x01000000
+    'OC_SCAN_FILE_SYSTEM_LOCK', #0x00000001
+    'OC_SCAN_DEVICE_LOCK',      #0x00000002
+    'OC_SCAN_RESERVE_0x00000004',
+    'OC_SCAN_RESERVE_0x00000008',
+    'OC_SCAN_RESERVE_0x00000010',
+    'OC_SCAN_RESERVE_0x00000020',
+    'OC_SCAN_RESERVE_0x00000040',
+    'OC_SCAN_RESERVE_0x00000080',
+    'OC_SCAN_ALLOW_FS_APFS',    #0x00000100
+    'OC_SCAN_ALLOW_FS_HFS',     #0x00000200
+    'OC_SCAN_ALLOW_FS_ESP',     #0x00000400
+    'OC_SCAN_ALLOW_FS_NTFS',    #0x00000800
+    'OC_SCAN_ALLOW_FS_LINUX_ROOT', #0x00001000
+    'OC_SCAN_ALLOW_FS_LINUX_DATA', #0x00002000
+    'OC_SCAN_ALLOW_FS_XBOOTLDR',   #0x00004000
+    'OC_SCAN_RESERVE_0x00008000',
+    'OC_SCAN_ALLOW_DEVICE_SATA',  #0x00010000
+    'OC_SCAN_ALLOW_DEVICE_SASEX', #0x00020000
+    'OC_SCAN_ALLOW_DEVICE_SCSI',  #0x00040000
+    'OC_SCAN_ALLOW_DEVICE_NVME',  #0x00080000
+    'OC_SCAN_ALLOW_DEVICE_ATAPI', #0x00100000
+    'OC_SCAN_ALLOW_DEVICE_USB',   #0x00200000
+    'OC_SCAN_ALLOW_DEVICE_FIREWIRE', #0x00400000
+    'OC_SCAN_ALLOW_DEVICE_SDCARD', #0x00800000
+    'OC_SCAN_ALLOW_DEVICE_PCI'    #0x01000000
 ]
 
 #csr-active-config
 csr_list = [
-    "CSR_ALLOW_UNTRUSTED_KEXTS",
-    "CSR_ALLOW_UNRESTRICTED_FS",
-    "CSR_ALLOW_TASK_FOR_PID",
-    "CSR_ALLOW_KERNEL_DEBUGGER",
-    "CSR_ALLOW_APPLE_INTERNAL",
-    # "CSR_ALLOW_DESTRUCTIVE_DTRACE (name deprecated)",
-    "CSR_ALLOW_UNRESTRICTED_DTRACE",
-    "CSR_ALLOW_UNRESTRICTED_NVRAM",
-    "CSR_ALLOW_DEVICE_CONFIGURATION",
-    "CSR_ALLOW_ANY_RECOVERY_OS",
-    "CSR_ALLOW_UNAPPROVED_KEXTS",
-    "CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE",
-    "CSR_ALLOW_UNAUTHENTICATED_ROOT"
+    'CSR_ALLOW_UNTRUSTED_KEXTS',
+    'CSR_ALLOW_UNRESTRICTED_FS',
+    'CSR_ALLOW_TASK_FOR_PID',
+    'CSR_ALLOW_KERNEL_DEBUGGER',
+    'CSR_ALLOW_APPLE_INTERNAL',
+    # 'CSR_ALLOW_DESTRUCTIVE_DTRACE (name deprecated)',
+    'CSR_ALLOW_UNRESTRICTED_DTRACE',
+    'CSR_ALLOW_UNRESTRICTED_NVRAM',
+    'CSR_ALLOW_DEVICE_CONFIGURATION',
+    'CSR_ALLOW_ANY_RECOVERY_OS',
+    'CSR_ALLOW_UNAPPROVED_KEXTS',
+    'CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE',
+    'CSR_ALLOW_UNAUTHENTICATED_ROOT'
 ]
 
 #Properties Description
 desc_dict = {
-    "OC_ATTR_USE_VOLUME_ICON" : "OC_ATTR_USE_VOLUME_ICON",
-    "OC_ATTR_USE_DISK_LABEL_FILE" : "OC_ATTR_USE_DISK_LABEL_FILE",
-    "OC_ATTR_USE_GENERIC_LABEL_IMAGE" : "OC_ATTR_USE_GENERIC_LABEL_IMAGE",
-    "OC_ATTR_HIDE_THEMED_ICONS" : "OC_ATTR_HIDE_THEMED_ICONS",
-    "OC_ATTR_USE_POINTER_CONTROL" : "OC_ATTR_USE_POINTER_CONTROL",
-    "OC_ATTR_SHOW_DEBUG_DISPLAY" : "OC_ATTR_SHOW_DEBUG_DISPLAY",
-    "OC_ATTR_USE_MINIMAL_UI" : "OC_ATTR_USE_MINIMAL_UI",
-    "OC_ATTR_USE_FLAVOUR_ICON" : "OC_ATTR_USE_FLAVOUR_ICON",
-    "OC_ATTR_USE_REVERSED_UI" : "OC_ATTR_USE_REVERSED_UI",
-    "OC_ATTR_REDUCE_MOTION" : "OC_ATTR_REDUCE_MOTION",
-    "OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE" : "expose the printable booter path as a UEFI variable.",
-    "OC_EXPOSE_OCVERSION_AS_UEFI_VARIABLE"  :  "expose the OpenCore version as a UEFI variable.",
-    "OC_EXPOSE_OCVERSION_IN_PICKER_NEMU" : "expose the OpenCore version in the OpenCore picker menu title.",
-    "OC_EXPOSE_OEMINFO_AS_UEFI_VARIABLES" : "expose OEM information as a set of UEFI variables.",
-    "OC_SCAN_FILE_SYSTEM_LOCK" : "OC_SCAN_FILE_SYSTEM_LOCK", #0x00000001
-    "OC_SCAN_DEVICE_LOCK" : "OC_SCAN_DEVICE_LOCK",      #0x00000002
-    "OC_SCAN_RESERVE_0x00000004" : "",
-    "OC_SCAN_RESERVE_0x00000008" : "",
-    "OC_SCAN_RESERVE_0x00000010" : "",
-    "OC_SCAN_RESERVE_0x00000020" : "",
-    "OC_SCAN_RESERVE_0x00000040" : "",
-    "OC_SCAN_RESERVE_0x00000080" : "",
-    "OC_SCAN_ALLOW_FS_APFS" : "OC_SCAN_ALLOW_FS_APFS",    #0x00000100
-    "OC_SCAN_ALLOW_FS_HFS" : "OC_SCAN_ALLOW_FS_HFS",     #0x00000200
-    "OC_SCAN_ALLOW_FS_ESP" : "OC_SCAN_ALLOW_FS_ESP",     #0x00000400
-    "OC_SCAN_ALLOW_FS_NTFS" : "OC_SCAN_ALLOW_FS_NTFS",    #0x00000800
-    "OC_SCAN_ALLOW_FS_LINUX_ROOT" : "OC_SCAN_ALLOW_FS_LINUX_ROOT", #0x00001000
-    "OC_SCAN_ALLOW_FS_LINUX_DATA" : "OC_SCAN_ALLOW_FS_LINUX_DATA", #0x00002000
-    "OC_SCAN_ALLOW_FS_XBOOTLDR" : "OC_SCAN_ALLOW_FS_XBOOTLDR",   #0x00004000
-    "OC_SCAN_RESERVE_0x00008000" : "",
-    "OC_SCAN_ALLOW_DEVICE_SATA" : "OC_SCAN_ALLOW_DEVICE_SATA",  #0x00010000
-    "OC_SCAN_ALLOW_DEVICE_SASEX" : "OC_SCAN_ALLOW_DEVICE_SASEX", #0x00020000
-    "OC_SCAN_ALLOW_DEVICE_SCSI" : "OC_SCAN_ALLOW_DEVICE_SCSI",  #0x00040000
-    "OC_SCAN_ALLOW_DEVICE_NVME" : "OC_SCAN_ALLOW_DEVICE_NVME",  #0x00080000
-    "OC_SCAN_ALLOW_DEVICE_ATAPI" : "OC_SCAN_ALLOW_DEVICE_ATAPI", #0x00100000
-    "OC_SCAN_ALLOW_DEVICE_USB" : "OC_SCAN_ALLOW_DEVICE_USB",   #0x00200000
-    "OC_SCAN_ALLOW_DEVICE_FIREWIRE" : "OC_SCAN_ALLOW_DEVICE_FIREWIRE", #0x00400000
-    "OC_SCAN_ALLOW_DEVICE_SDCARD" : "OC_SCAN_ALLOW_DEVICE_SDCARD", #0x00800000
-    "OC_SCAN_ALLOW_DEVICE_PCI" : "OC_SCAN_ALLOW_DEVICE_PCI",    #0x01000000
-    "CSR_ALLOW_UNTRUSTED_KEXTS" : "CSR_ALLOW_UNTRUSTED_KEXTS",
-    "CSR_ALLOW_UNRESTRICTED_FS" : "CSR_ALLOW_UNRESTRICTED_FS",
-    "CSR_ALLOW_TASK_FOR_PID" : "CSR_ALLOW_TASK_FOR_PID",
-    "CSR_ALLOW_KERNEL_DEBUGGER" : "CSR_ALLOW_KERNEL_DEBUGGER",
-    "CSR_ALLOW_APPLE_INTERNAL" : "CSR_ALLOW_APPLE_INTERNAL",
-    # "CSR_ALLOW_DESTRUCTIVE_DTRACE (name deprecated)" : "",
-    "CSR_ALLOW_UNRESTRICTED_DTRACE" : "CSR_ALLOW_UNRESTRICTED_DTRACE",
-    "CSR_ALLOW_UNRESTRICTED_NVRAM" : "CSR_ALLOW_UNRESTRICTED_NVRAM",
-    "CSR_ALLOW_DEVICE_CONFIGURATION" : "CSR_ALLOW_DEVICE_CONFIGURATION",
-    "CSR_ALLOW_ANY_RECOVERY_OS" : "CSR_ALLOW_ANY_RECOVERY_OS",
-    "CSR_ALLOW_UNAPPROVED_KEXTS" : "CSR_ALLOW_UNAPPROVED_KEXTS",
-    "CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE" : "CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE",
-    "CSR_ALLOW_UNAUTHENTICATED_ROOT" : "CSR_ALLOW_UNAUTHENTICATED_ROOT",
-    "bootargs_verbose" : "-v (verbose mode)",
-    "bootargs_lilubetaall" : "-lilubetaall (Lilu on unsupported OS)",
-    "bootargs_rtsfbeta" : "-rtsfbeta (driver RealtekCardReaderFriend.kext)",
-    "bootargs_keepsyms" : "keepsyms=1 (Debug)",
-    "bootargs_debug" : "debug=0x100 (Debug)",
-    "bootargs_rtcfx_exclude" : "rtcfx_exclude=0E-7F,AC-FF (for HP laptop)",
-    "bootargs_ipc_control_port_options" : "ipc_control_port_options=0 (for Intel HD Graphics)",
-    "bootargs_disablegfxfirmware" : "-disablegfxfirmware (avoid ME never returned error)"
+    'OC_ATTR_USE_VOLUME_ICON' : 'OC_ATTR_USE_VOLUME_ICON',
+    'OC_ATTR_USE_DISK_LABEL_FILE' : 'OC_ATTR_USE_DISK_LABEL_FILE',
+    'OC_ATTR_USE_GENERIC_LABEL_IMAGE' : 'OC_ATTR_USE_GENERIC_LABEL_IMAGE',
+    'OC_ATTR_HIDE_THEMED_ICONS' : 'OC_ATTR_HIDE_THEMED_ICONS',
+    'OC_ATTR_USE_POINTER_CONTROL' : 'OC_ATTR_USE_POINTER_CONTROL',
+    'OC_ATTR_SHOW_DEBUG_DISPLAY' : 'OC_ATTR_SHOW_DEBUG_DISPLAY',
+    'OC_ATTR_USE_MINIMAL_UI' : 'OC_ATTR_USE_MINIMAL_UI',
+    'OC_ATTR_USE_FLAVOUR_ICON' : 'OC_ATTR_USE_FLAVOUR_ICON',
+    'OC_ATTR_USE_REVERSED_UI' : 'OC_ATTR_USE_REVERSED_UI',
+    'OC_ATTR_REDUCE_MOTION' : 'OC_ATTR_REDUCE_MOTION',
+    'OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE' : 'expose the printable booter path as a UEFI variable.',
+    'OC_EXPOSE_OCVERSION_AS_UEFI_VARIABLE'  :  'expose the OpenCore version as a UEFI variable.',
+    'OC_EXPOSE_OCVERSION_IN_PICKER_NEMU' : 'expose the OpenCore version in the OpenCore picker menu title.',
+    'OC_EXPOSE_OEMINFO_AS_UEFI_VARIABLES' : 'expose OEM information as a set of UEFI variables.',
+    'OC_SCAN_FILE_SYSTEM_LOCK' : 'OC_SCAN_FILE_SYSTEM_LOCK', #0x00000001
+    'OC_SCAN_DEVICE_LOCK' : 'OC_SCAN_DEVICE_LOCK',      #0x00000002
+    'OC_SCAN_RESERVE_0x00000004' : '',
+    'OC_SCAN_RESERVE_0x00000008' : '',
+    'OC_SCAN_RESERVE_0x00000010' : '',
+    'OC_SCAN_RESERVE_0x00000020' : '',
+    'OC_SCAN_RESERVE_0x00000040' : '',
+    'OC_SCAN_RESERVE_0x00000080' : '',
+    'OC_SCAN_ALLOW_FS_APFS' : 'OC_SCAN_ALLOW_FS_APFS',    #0x00000100
+    'OC_SCAN_ALLOW_FS_HFS' : 'OC_SCAN_ALLOW_FS_HFS',     #0x00000200
+    'OC_SCAN_ALLOW_FS_ESP' : 'OC_SCAN_ALLOW_FS_ESP',     #0x00000400
+    'OC_SCAN_ALLOW_FS_NTFS' : 'OC_SCAN_ALLOW_FS_NTFS',    #0x00000800
+    'OC_SCAN_ALLOW_FS_LINUX_ROOT' : 'OC_SCAN_ALLOW_FS_LINUX_ROOT', #0x00001000
+    'OC_SCAN_ALLOW_FS_LINUX_DATA' : 'OC_SCAN_ALLOW_FS_LINUX_DATA', #0x00002000
+    'OC_SCAN_ALLOW_FS_XBOOTLDR' : 'OC_SCAN_ALLOW_FS_XBOOTLDR',   #0x00004000
+    'OC_SCAN_RESERVE_0x00008000' : '',
+    'OC_SCAN_ALLOW_DEVICE_SATA' : 'OC_SCAN_ALLOW_DEVICE_SATA',  #0x00010000
+    'OC_SCAN_ALLOW_DEVICE_SASEX' : 'OC_SCAN_ALLOW_DEVICE_SASEX', #0x00020000
+    'OC_SCAN_ALLOW_DEVICE_SCSI' : 'OC_SCAN_ALLOW_DEVICE_SCSI',  #0x00040000
+    'OC_SCAN_ALLOW_DEVICE_NVME' : 'OC_SCAN_ALLOW_DEVICE_NVME',  #0x00080000
+    'OC_SCAN_ALLOW_DEVICE_ATAPI' : 'OC_SCAN_ALLOW_DEVICE_ATAPI', #0x00100000
+    'OC_SCAN_ALLOW_DEVICE_USB' : 'OC_SCAN_ALLOW_DEVICE_USB',   #0x00200000
+    'OC_SCAN_ALLOW_DEVICE_FIREWIRE' : 'OC_SCAN_ALLOW_DEVICE_FIREWIRE', #0x00400000
+    'OC_SCAN_ALLOW_DEVICE_SDCARD' : 'OC_SCAN_ALLOW_DEVICE_SDCARD', #0x00800000
+    'OC_SCAN_ALLOW_DEVICE_PCI' : 'OC_SCAN_ALLOW_DEVICE_PCI',    #0x01000000
+    'CSR_ALLOW_UNTRUSTED_KEXTS' : 'CSR_ALLOW_UNTRUSTED_KEXTS',
+    'CSR_ALLOW_UNRESTRICTED_FS' : 'CSR_ALLOW_UNRESTRICTED_FS',
+    'CSR_ALLOW_TASK_FOR_PID' : 'CSR_ALLOW_TASK_FOR_PID',
+    'CSR_ALLOW_KERNEL_DEBUGGER' : 'CSR_ALLOW_KERNEL_DEBUGGER',
+    'CSR_ALLOW_APPLE_INTERNAL' : 'CSR_ALLOW_APPLE_INTERNAL',
+    # 'CSR_ALLOW_DESTRUCTIVE_DTRACE (name deprecated)' : '',
+    'CSR_ALLOW_UNRESTRICTED_DTRACE' : 'CSR_ALLOW_UNRESTRICTED_DTRACE',
+    'CSR_ALLOW_UNRESTRICTED_NVRAM' : 'CSR_ALLOW_UNRESTRICTED_NVRAM',
+    'CSR_ALLOW_DEVICE_CONFIGURATION' : 'CSR_ALLOW_DEVICE_CONFIGURATION',
+    'CSR_ALLOW_ANY_RECOVERY_OS' : 'CSR_ALLOW_ANY_RECOVERY_OS',
+    'CSR_ALLOW_UNAPPROVED_KEXTS' : 'CSR_ALLOW_UNAPPROVED_KEXTS',
+    'CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE' : 'CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE',
+    'CSR_ALLOW_UNAUTHENTICATED_ROOT' : 'CSR_ALLOW_UNAUTHENTICATED_ROOT',
+    'bootargs_verbose' : '-v (verbose mode)',
+    'bootargs_lilubetaall' : '-lilubetaall (Lilu on unsupported OS)',
+    'bootargs_rtsfbeta' : '-rtsfbeta (driver RealtekCardReaderFriend.kext)',
+    'bootargs_keepsyms' : 'keepsyms=1 (Debug)',
+    'bootargs_debug' : 'debug=0x100 (Debug)',
+    'bootargs_rtcfx_exclude' : 'rtcfx_exclude=0E-7F,AC-FF (for HP laptop)',
+    'bootargs_ipc_control_port_options' : 'ipc_control_port_options=0 (for Intel HD Graphics)',
+    'bootargs_disablegfxfirmware' : '-disablegfxfirmware (avoid ME never returned error)'
 }
 
 bootargs_dict = {
-    'bootargs_verbose':{
-        'displayname':'-v (verbose mode)',
-        'value':'-v'
-    },
-    'bootargs_lilubetaall':{
-        'displayname':'-lilubetaall (Lilu on unsupported OS)',
-        'value':'-lilubetaall'
-    },
-    'bootargs_rtsfbeta':{
-        'displayname':'-rtsfbeta (driver RealtekCardReaderFriend.kext)',
-        'value':'-rtsfbeta'
-    },
-    'bootargs_keepsyms':{
-        'displayname':'keepsyms=1 (Debug)',
-        'value':'keepsyms=1'
-    },
-    'bootargs_debug':{
-        'displayname':'debug=0x100 (Debug)',
-        'value':'debug=0x100'
-    },
-    'bootargs_rtcfx_exclude':{
-        'displayname':'rtcfx_exclude=0E-7F,AC-FF (for HP laptop)',
-        'value':'rtcfx_exclude=0E-7F,AC-FF'
-    },
-    'bootargs_ipc_control_port_options':{
-        'displayname':'ipc_control_port_options=0 (for Intel HD Graphics)',
-        'value':'ipc_control_port_options=0'
-    },
-    'bootargs_disablegfxfirmware':{
-        'displayname':'-disablegfxfirmware (avoid ME never returned error)',
-        'value':'-disablegfxfirmware'
-    }
-
+    'bootargs_verbose':'-v',
+    'bootargs_lilubetaall':'-lilubetaall',
+    'bootargs_rtsfbeta':'-rtsfbeta',
+    'bootargs_keepsyms':'keepsyms=1',
+    'bootargs_debug':'debug=0x100',
+    'bootargs_rtcfx_exclude':'rtcfx_exclude=0E-7F,AC-FF',
+    'bootargs_ipc_control_port_options':'ipc_control_port_options=0',
+    'bootargs_disablegfxfirmware':'-disablegfxfirmware'
 }
 
 class OCHelp(object):
@@ -332,7 +307,7 @@ class OCHelp(object):
     def allBootArgsLst(self):
         result = []
         for key in bootargs_dict.keys():
-            result.append(bootargs_dict[key]['value'])
+            result.append(bootargs_dict[key])
         return result
     def bootArgsStrToList(self,bootStr:str):
         '''將 boot-args 字串直接轉為陣列
@@ -350,7 +325,7 @@ class OCHelp(object):
         '''
         key = None
         for item in bootargs_dict.keys():
-            if bootargs_dict[item]['value'] == inVal:
+            if bootargs_dict[item] == inVal:
                 key = item
                 break
         return key
@@ -365,7 +340,7 @@ class OCHelp(object):
         bootArgs = bootArgsStr.split()
         for sArg in bootArgsStr.split():
            for key in bootargs_dict.keys():
-               if bootargs_dict[key]['value'] == sArg:
+               if bootargs_dict[key] == sArg:
                    bootArgs.remove(sArg)
         
         #添加已勾選的，有重複則不添加
@@ -378,14 +353,6 @@ class OCHelp(object):
             if not found:
                 bootArgs.append(bootArg)
         return ' '.join(bootArgs)
-
-
-
-        
-        
-
-
-
 
 if __name__ == "__main__":
     oc = OCHelp()
