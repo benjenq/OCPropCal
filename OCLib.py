@@ -145,7 +145,7 @@ desc_dict = {
     "bootargs_keepsyms" : "keepsyms=1 (Debug)",
     "bootargs_debug" : "debug=0x100 (Debug)",
     "bootargs_rtcfx_exclude" : "rtcfx_exclude=0E-7F,AC-FF (for HP laptop)",
-    "bootargs_ipc_control_port_options" : "ipc_control_port_options=0 (for Intel HD 4000)",
+    "bootargs_ipc_control_port_options" : "ipc_control_port_options=0 (for Intel HD Graphics)",
     "bootargs_disablegfxfirmware" : "-disablegfxfirmware (avoid ME never returned error)"
 }
 
@@ -175,7 +175,7 @@ bootargs_dict = {
         'value':'rtcfx_exclude=0E-7F,AC-FF'
     },
     'bootargs_ipc_control_port_options':{
-        'displayname':'ipc_control_port_options=0 (for Intel HD 4000)',
+        'displayname':'ipc_control_port_options=0 (for Intel HD Graphics)',
         'value':'ipc_control_port_options=0'
     },
     'bootargs_disablegfxfirmware':{
