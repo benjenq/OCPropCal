@@ -8,6 +8,7 @@ class OCPropType(Enum):
     ESD_STATUS = 2
     SCP_STATUS = 3
     CSR_STATUS = 4
+    BOOT_ARGS = 5
 
 #PickerAttributes
 oca_list = [
@@ -137,7 +138,51 @@ desc_dict = {
     "CSR_ALLOW_ANY_RECOVERY_OS" : "CSR_ALLOW_ANY_RECOVERY_OS",
     "CSR_ALLOW_UNAPPROVED_KEXTS" : "CSR_ALLOW_UNAPPROVED_KEXTS",
     "CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE" : "CSR_ALLOW_EXECUTABLE_POLICY_OVERRIDE",
-    "CSR_ALLOW_UNAUTHENTICATED_ROOT" : "CSR_ALLOW_UNAUTHENTICATED_ROOT"
+    "CSR_ALLOW_UNAUTHENTICATED_ROOT" : "CSR_ALLOW_UNAUTHENTICATED_ROOT",
+    "bootargs_verbose" : "-v (verbose mode)",
+    "bootargs_lilubetaall" : "-lilubetaall (Lilu on unsupported OS)",
+    "bootargs_rtsfbeta" : "-rtsfbeta (driver RealtekCardReaderFriend.kext)",
+    "bootargs_keepsyms" : "keepsyms=1 (Debug)",
+    "bootargs_debug" : "debug=0x100 (Debug)",
+    "bootargs_rtcfx_exclude" : "rtcfx_exclude=0E-7F,AC-FF (for HP laptop)",
+    "bootargs_ipc_control_port_options" : "ipc_control_port_options=0 (for Intel HD 4000)",
+    "bootargs_disablegfxfirmware" : "-disablegfxfirmware (avoid ME never returned error)"
+}
+
+bootargs_dict = {
+    'bootargs_verbose':{
+        'displayname':'-v (verbose mode)',
+        'value':'-v'
+    },
+    'bootargs_lilubetaall':{
+        'displayname':'-lilubetaall (Lilu on unsupported OS)',
+        'value':'-lilubetaall'
+    },
+    'bootargs_rtsfbeta':{
+        'displayname':'-rtsfbeta (driver RealtekCardReaderFriend.kext)',
+        'value':'-rtsfbeta'
+    },
+    'bootargs_keepsyms':{
+        'displayname':'keepsyms=1 (Debug)',
+        'value':'keepsyms=1'
+    },
+    'bootargs_debug':{
+        'displayname':'debug=0x100 (Debug)',
+        'value':'debug=0x100'
+    },
+    'bootargs_rtcfx_exclude':{
+        'displayname':'rtcfx_exclude=0E-7F,AC-FF (for HP laptop)',
+        'value':'rtcfx_exclude=0E-7F,AC-FF'
+    },
+    'bootargs_ipc_control_port_options':{
+        'displayname':'ipc_control_port_options=0 (for Intel HD 4000)',
+        'value':'ipc_control_port_options=0'
+    },
+    'bootargs_disablegfxfirmware':{
+        'displayname':'-disablegfxfirmware (avoid ME never returned error)',
+        'value':'-disablegfxfirmware'
+    }
+
 }
 
 class OCHelp(object):
@@ -202,6 +247,18 @@ class OCHelp(object):
         if self.descDict == None:
             self.descDict = desc_dict
 
+    def objText(self,objName:str)->str:
+        '''從 checkbox 名稱取得文字顯示
+        ---
+        objName : checkbox 物件名稱
+
+        '''
+        try:
+            return self.descDict[objName]
+        except Exception as e:
+            traceback.print_exc()
+            return objName
+
     def lstFromHex(self,hexVal:str,pType:OCPropType = OCPropType.CSR_STATUS):
         '''Hex 回傳 CSR 陣列
         ---
@@ -210,7 +267,6 @@ class OCHelp(object):
         '''
         decVal = hexToDecimal(hexVal)
         return self.lstFromDecimal(decVal,pType)
-
 
     def lstFromDecimal(self,decVal:str,pType:OCPropType = OCPropType.CSR_STATUS):
         '''Decimal 十進位回傳陣列
@@ -272,6 +328,64 @@ class OCHelp(object):
         prefix: 是否有 0x 前綴
         '''
         return decimalToHex(self.lstToDecimal(lst,pType),prefix)
+    
+    def allBootArgsLst(self):
+        result = []
+        for key in bootargs_dict.keys():
+            result.append(bootargs_dict[key]['value'])
+        return result
+    def bootArgsStrToList(self,bootStr:str):
+        '''將 boot-args 字串直接轉為陣列
+        ---
+        bootStr: boot-args 全部字串
+        '''
+        # strip(): Trim a string
+        return bootStr.strip().split(' ')
+    
+    def bootValueToKey(self,inVal:str):
+        '''從單一 boot-arg 參數尋找 Checkbox 名稱
+        例如: 從 -v 找出 bootargs_verbose
+        ---
+        inVal: 單一 boot-arg 參數字串
+        '''
+        key = None
+        for item in bootargs_dict.keys():
+            if bootargs_dict[item]['value'] == inVal:
+                key = item
+                break
+        return key
+
+    def bootArgsWithArgs(self,bootArgsStr:str,bLst:list):
+        '''產生 Boot-Args
+        ---
+        bootArgsStr: 原始的 boot-args 字串內容
+        bLst: 勾選的 boot-args 陣列
+        '''
+        # 先消除
+        bootArgs = bootArgsStr.split()
+        for sArg in bootArgsStr.split():
+           for key in bootargs_dict.keys():
+               if bootargs_dict[key]['value'] == sArg:
+                   bootArgs.remove(sArg)
+        
+        #添加已勾選的，有重複則不添加
+        for bootArg in bLst:
+            found = False
+            for sArg in bootArgs:
+                if sArg == bootArg:
+                    found = True
+                    break
+            if not found:
+                bootArgs.append(bootArg)
+        return ' '.join(bootArgs)
+
+
+
+        
+        
+
+
+
 
 if __name__ == "__main__":
     oc = OCHelp()

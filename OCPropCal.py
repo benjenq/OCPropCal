@@ -4,6 +4,8 @@ from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QRegExpValidator, QDesktopServices
 from PyQt5.QtCore import QRegExp,QEvent,QUrl
 # pip3 install pyqtdarktheme #https://pypi.org/project/pyqtdarktheme/
+# for python 3.12:
+# pip3 install pyqtdarktheme==2.1.0 --ignore-requires-python
 import qdarktheme, darkdetect
 import traceback,os #,webbrowser
 import UIMainWindow
@@ -29,9 +31,11 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
         self.tb_csrData.setValidator(inputHex_validator)
         #https://stackoverflow.com/questions/2760206/qvalidator-for-hex-input
         #self.tb_csrData.setInputMask("HHHHHHHH") #用 regex 取代 HEX 遮罩
-        #textEdited 取代 textChanged
+        #textEdited 取代 textChanged, 限定使用鍵盤編輯才會觸發
         self.tb_csrData.textEdited[str].connect(lambda :self.tbDataEdited(self.tb_csrData,OCPropType.CSR_STATUS))
         #self.tb_csrData.textChanged[str].connect(lambda :self.tbDataEnter(self.tb_csrData,PropertiesType.CSR_STATUS))
+        # boot-args 編輯: textEdited 取代 textChanged, 限定使用鍵盤編輯才會觸發
+        self.tb_bootargs.textEdited[str].connect(lambda: self.tbBootArgsEdited(self.tb_bootargs))
 
         #OCA: PickerAttributes
         reg_exNum = QRegExp("[0-9]*")
@@ -56,6 +60,7 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
         self.checkEvent(OCPropType.OCA_STATUS,self.OC_ATTR_USE_DISK_LABEL_FILE)
         self.checkEvent(OCPropType.SCP_STATUS,self.OC_SCAN_FILE_SYSTEM_LOCK)
         self.checkEvent(OCPropType.ESD_STATUS,self.OC_EXPOSE_BOOTERPATH_AS_UEFI_VARIABLE)
+        # self.actionOpen.setShortcut('Ctrl+O') #use designer
         self.actionOpen.triggered.connect(self.openSelectDialog)
         self.actionSave.triggered.connect(self.saveToFile)
         #self.actionHelp.triggered.connect(lambda: webbrowser.open('http://www.google.com'))
@@ -63,9 +68,15 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
         self.actionReset.triggered.connect(lambda: self.resetDefault())
         self.actionOCLPSIP.triggered.connect(lambda: self.oclpSip())
         self.actionExit.triggered.connect(self.exitApp)
+        self.btnBootArgsCopy.clicked.connect(self.copyBootArgs) #用 lambda 好像有問題
         # 設定 tabWidget 可拖曳檔案
         #self.tabWidget.setAcceptDrops(True)
         self.tabWidget.installEventFilter(self)
+    
+    def copyBootArgs(self):
+        if self.tb_bootargs.text() != "":
+            QApplication.clipboard().setText(self.tb_bootargs.text())
+
 
     def openSelectDialog(self):
         dlg = QFileDialog()
@@ -90,10 +101,12 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             self.tb_esdNumber.setText(str(self.ocConfig.propDict['esd']))
             self.tb_scpNumber.setText(str(self.ocConfig.propDict['scp']))
             self.tb_csrData.setText(str(self.ocConfig.propDict['csr']))
+            self.tb_bootargs.setText(str(self.ocConfig.propDict['boot-args']))
             self.tbNumberEdited(self.tb_ocaNumber,OCPropType.OCA_STATUS)
             self.tbNumberEdited(self.tb_esdNumber,OCPropType.ESD_STATUS)
             self.tbNumberEdited(self.tb_scpNumber,OCPropType.SCP_STATUS)
             self.tbDataEdited(self.tb_csrData,OCPropType.CSR_STATUS)
+            self.tbBootArgsEdited(self.tb_bootargs)
             return True
         except Exception as e:
             traceback.print_exc()
@@ -106,7 +119,8 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
         pDict = {'oca': int(self.tb_ocaNumber.text()),
                  'esd': int(self.tb_esdNumber.text()),
                  'scp': int(self.tb_scpNumber.text()),
-                 'csr': str(self.tb_csrData.text())}
+                 'csr': str(self.tb_csrData.text()),
+                 'boot-args': str(self.tb_bootargs.text())}
         self.ocConfig.bind_propDict(pDict)
         success, msg = self.ocConfig.saveToFile(self.ocConfig.filePath)
         self.statusbar.showMessage(msg)
@@ -134,7 +148,7 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             chk = self.tab_csr.findChild(QCheckBox,item)
             if chk == None:
                 continue
-            chk.setText(self.ocHelp.descDict[item])
+            chk.setText(self.ocHelp.objText(item))
             #chk.stateChanged.connect(lambda:self.checkEvent(PropertiesType.CSR_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             chk.clicked.connect(lambda:self.checkEvent(OCPropType.CSR_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             '''解決 BUG 的寫法
@@ -150,7 +164,7 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             chk = self.tab_oca.findChild(QCheckBox,item)
             if chk == None:
                 continue
-            chk.setText(self.ocHelp.descDict[item])
+            chk.setText(self.ocHelp.objText(item))
             #chk.stateChanged.connect(lambda:self.checkEvent(PropertiesType.OCA_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             chk.clicked.connect(lambda:self.checkEvent(OCPropType.OCA_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             #https://stackoverflow.com/questions/51456403/mouseover-event-for-a-pyqt5-label
@@ -159,7 +173,7 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             chk = self.tab_esd.findChild(QCheckBox,item)
             if chk == None:
                 continue
-            chk.setText(self.ocHelp.descDict[item])
+            chk.setText(self.ocHelp.objText(item))
             #chk.stateChanged.connect(lambda:self.checkEvent(PropertiesType.ESD_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             chk.clicked.connect(lambda:self.checkEvent(OCPropType.ESD_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             #https://stackoverflow.com/questions/51456403/mouseover-event-for-a-pyqt5-label
@@ -168,10 +182,18 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             chk = self.tab_scp.findChild(QCheckBox,item)
             if chk == None:
                 continue
-            chk.setText(self.ocHelp.descDict[item])
+            chk.setText(self.ocHelp.objText(item))
             #chk.stateChanged.connect(lambda:self.checkEvent(PropertiesType.SCP_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             chk.clicked.connect(lambda:self.checkEvent(OCPropType.SCP_STATUS, chk)) #connect 會根據 chk 的變化而改變，導致 BUG
             #https://stackoverflow.com/questions/51456403/mouseover-event-for-a-pyqt5-label
+            chk.installEventFilter(self)
+        #boot-args
+        for item in bootargs_dict.keys():
+            chk = self.tab_bootargs.findChild(QCheckBox,item)
+            if chk == None:
+                continue
+            chk.setText(self.ocHelp.objText(item))
+            chk.clicked.connect(lambda: self.checkBootArgs(chk))
             chk.installEventFilter(self)
 
     def tbDataEdited(self,obj:QLineEdit,pType:OCPropType):
@@ -265,6 +287,19 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
                 chkb = self.tab_csr.findChild(QCheckBox,chkItem)
                 if chkb != None:
                     chkb.setChecked(True)
+        # Boot-Args
+        elif pType == OCPropType.BOOT_ARGS:
+            for item in bootargs_dict.keys():
+                chk = self.tab_bootargs.findChild(QCheckBox,item)
+                if chk != None:
+                    chk.setChecked(False)
+            for bootArg in lst:
+                chkName = self.ocHelp.bootValueToKey(bootArg)
+                if chkName == None:
+                    continue
+                chkb = self.tab_bootargs.findChild(QCheckBox,chkName)
+                if chkb != None:
+                    chkb.setChecked(True)
     
     def checkEvent(self,pType:OCPropType,obj:QCheckBox):
         ''' 點擊 Checkbox 事件
@@ -313,7 +348,26 @@ class mainWin(QtWidgets.QMainWindow,UIMainWindow.Ui_MainWindow):
             result = self.ocHelp.lstToHex(chkList,pType,False)
             self.tb_csrHex.setText(result)
             self.tb_csrData.setText(hexToData(result))
-                  
+
+    # Boot-Args 相關
+    def checkBootArgs(self,obj:QCheckBox):
+        #找出勾選的 boot-args
+        bootChkLst=[]
+        for objName in bootargs_dict.keys():
+            chk = self.tab_bootargs.findChild(QCheckBox,objName)
+            if chk == None:
+                continue
+            if chk.isChecked():
+                bootChkLst.append(bootargs_dict[objName]['value'])
+        result = self.ocHelp.bootArgsWithArgs(self.tb_bootargs.text(),bootChkLst)
+        self.tb_bootargs.setText(result)
+
+    def tbBootArgsEdited(self,obj:QLineEdit):
+        '''編輯 Boot-Args
+        ---
+        '''
+        lst = self.ocHelp.bootArgsStrToList(obj.text())
+        self.lstBindCheckBox(lst,OCPropType.BOOT_ARGS)
     def exitApp(self):
         self.close()
     

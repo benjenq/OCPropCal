@@ -21,6 +21,7 @@ class OCConfig(object):
                 csr=self.allConfig["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["csr-active-config"]
                 #bytes to hex https://stackoverflow.com/questions/6624453/whats-the-correct-way-to-convert-bytes-to-a-hex-string-in-python-3
                 pDist["csr"] = str(csr.hex())
+                pDist["boot-args"] = self.allConfig["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["boot-args"]
                 #print(pl["Misc"]["Security"]["ScanPolicy"])
                 self.propDict = pDist
                 self.isRead = True
@@ -30,19 +31,29 @@ class OCConfig(object):
             pass
     
     def bind_propDict(self,pDict:dict):
+        '''綁定 Dictionary
+        ---
+        pDict: 綁定來源 Dictionary
+        '''
         self.propDict["oca"] = pDict["oca"]
         self.propDict["esd"] = pDict["esd"]
         self.propDict["scp"] = pDict["scp"]
         self.propDict["csr"] = pDict["csr"]
+        self.propDict["boot-args"] = pDict["boot-args"]
     
     def syncWithDict(self):
         self.allConfig["Misc"]["Boot"]["PickerAttributes"] = self.propDict["oca"]
         self.allConfig["Misc"]["Security"]["ExposeSensitiveData"] = self.propDict["esd"]
         self.allConfig["Misc"]["Security"]["ScanPolicy"] = self.propDict["scp"]
         #https://www.geeksforgeeks.org/convert-hex-string-to-bytes-in-python/
-        self.allConfig["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["csr-active-config"] = bytes.fromhex(str(self.propDict["csr"]))    
+        self.allConfig["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["csr-active-config"] = bytes.fromhex(str(self.propDict["csr"]))
+        self.allConfig["NVRAM"]["Add"]["7C436110-AB2A-4BBB-A880-FE41995C9F82"]["boot-args"] = self.propDict["boot-args"]
 
     def saveToFile(self, filePath:str):
+        '''存檔
+        ---
+        filePath: 檔案路徑
+        '''
         if not self.isRead:
             return False,"File {} did Not read.".format(filePath)
         self.syncWithDict()
@@ -61,7 +72,8 @@ class OCConfig(object):
         self.propDict = {'oca': 0,
                          'esd': 0,
                          'scp': 0,
-                         'csr':''}
+                         'csr': '',
+                         'boot-args':''}
 
 if __name__ == "__main__":
     cfg = OCConfig('R:/OCDecode/Sample.plist')
