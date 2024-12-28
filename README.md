@@ -8,7 +8,7 @@ A small tools to calculate OpenCore config properties value. Easy to use.
 ### Introduction
 
 - Support calculate 4 properties: **`PickerAttributes`**, **`ExposeSensitiveData`**, **`ScanPolicy`**, **`csr-active-config`**.
-- Load & save OencCore config file `config.plist`. Support all OC version. 
+- Load & save OpenCore config file `config.plist`. Support all OC version. 
 - Support Windows / macOS / Linux (Ubuntu, Debian...etc)
 - Support "checkboxes to value" and "value to checkboxes" at the same user interface.
 
